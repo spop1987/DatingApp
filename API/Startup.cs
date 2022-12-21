@@ -23,6 +23,7 @@ namespace API
                 Console.WriteLine("--> Using SqlServer DB");
                 ConfigureDb(services);
             }else{
+                ConfigureDb(services);
                 Console.WriteLine("--> Using InMem Db");
                 services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("InMen"));
             }
