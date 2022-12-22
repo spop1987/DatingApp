@@ -1,5 +1,5 @@
 using API.Data.DataAccess;
-using API.Entities;
+using API.Data.Entities;
 
 namespace API.Services
 {

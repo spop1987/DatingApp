@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Entities.TypeConfig
+namespace API.Data.Entities.TypeConfig
 {
     public static class Extension
     {

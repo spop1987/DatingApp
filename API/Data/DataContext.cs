@@ -1,6 +1,6 @@
 
-using API.Entities;
-using API.Entities.TypeConfig;
+using API.Data.Entities;
+using API.Data.Entities.TypeConfig;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data

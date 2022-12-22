@@ -1,4 +1,4 @@
-using API.Entities;
+using API.Data.Entities;
 
 namespace API.Data.DataAccess
 {

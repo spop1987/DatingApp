@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace API.Entities.TypeConfig
+namespace API.Data.Entities.TypeConfig
 {
     public class AppUserTypeConfig : IEntityTypeConfiguration<AppUser>
     {

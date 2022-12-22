@@ -1,4 +1,5 @@
 using API.Data;
+using API.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -19,6 +20,11 @@ namespace API
         {
             services.AddControllers();
             services.AddDependencyServices();
+            
+            services.AddIdentityServices(Configuration);
+            
+            services.ConfigureExceptionFilter(httpRequest => httpRequest.GetActivity());
+            
             if(_env.IsProduction()){
                 Console.WriteLine("--> Using SqlServer DB");
                 ConfigureDb(services);
@@ -48,6 +54,10 @@ namespace API
             }
             app.UseRouting();
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+            
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -1,8 +1,10 @@
 using API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
@@ -20,6 +22,7 @@ namespace API.Controllers
             return Ok(await _userServices.GetUserById(userId));
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
