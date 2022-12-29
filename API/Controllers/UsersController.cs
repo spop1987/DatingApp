@@ -21,7 +21,6 @@ namespace API.Controllers
         {
             return Ok(await _userServices.GetUserById(userId));
         }
-
         [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetUsers()
