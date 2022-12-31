@@ -1,5 +1,6 @@
 using API.Data;
 using API.Helpers;
+using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
@@ -53,6 +54,7 @@ namespace API
                 // app.UseSwaggerUI(opt => opt.SwaggerEndpoint("/swagger/v1/swagger.json", "BooksApi v1"));
             }
             app.UseRouting();
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
             
             app.UseAuthentication();
@@ -63,7 +65,7 @@ namespace API
                 endpoints.MapControllers();
             });
             
-            PrepDb.PrepPopulation(app, env.IsProduction());
+            PrepDb.PrepPopulation(app, env.IsProduction()).Wait();
         }
     }
 }

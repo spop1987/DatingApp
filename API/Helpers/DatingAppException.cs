@@ -37,6 +37,15 @@ namespace API.Helpers
                 Message = $"Error trying to create a duplicated user. Activity: {(ErrorActivity)activity}"
             };
         }
+
+        public static Error NotFound(ErrorActivity activity)
+        {
+            return new Error
+            {
+                StatusCode = StatusCodes.Status400BadRequest,
+                Message = $"Not found User. Activity: {(ErrorActivity)activity}"
+            };
+        }
     }
 
     public abstract class DatingAppException : Exception
@@ -51,5 +60,19 @@ namespace API.Helpers
         public DatingAppInvalidUserException(Error error) : base(error) {}
         public DatingAppInvalidUserException(string message) : base(message) {}
         public DatingAppInvalidUserException() : base(string.Empty) {}
+    }
+
+    public class DatingAppNotFoundUserException : DatingAppException
+    {
+        public DatingAppNotFoundUserException(Error error) : base(error) {}
+        public DatingAppNotFoundUserException(string message) : base(message) {}
+        public DatingAppNotFoundUserException() : base(string.Empty) {}
+    }
+
+    public class DatingAppNotFoundUsersException : DatingAppException
+    {
+        public DatingAppNotFoundUsersException(Error error) : base(error) {}
+        public DatingAppNotFoundUsersException(string message) : base(message) {}
+        public DatingAppNotFoundUsersException() : base(string.Empty) {}
     }
 }

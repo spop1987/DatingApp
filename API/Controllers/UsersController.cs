@@ -16,6 +16,7 @@ namespace API.Controllers
             _userServices = userServices;
         }
 
+        [AllowAnonymous]
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserById(int userId)
         {

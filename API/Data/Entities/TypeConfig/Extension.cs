@@ -7,6 +7,7 @@ namespace API.Data.Entities.TypeConfig
         public static void ConfigurationAllTypeConfig(this ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new AppUserTypeConfig());
+            modelBuilder.ApplyConfiguration(new PhotoTypeConfig());
         }
     }
 }

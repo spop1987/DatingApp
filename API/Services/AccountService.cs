@@ -42,7 +42,7 @@ namespace API.Services
                 if(computedHash[i] != user.PasswordHash[i]) throw new Exception("Unauthorized: Invalid Passwrord");
             }
 
-            return _toDtoTranslator.ToUserDto(user);
+            return await _toDtoTranslator.ToUserDto(user);
         }
 
         public async Task<UserDto> Register(RegisterDto registerDto)
@@ -79,7 +79,7 @@ namespace API.Services
             };
 
             await _commands.SaveUserAsync(user);
-            return _toDtoTranslator.ToUserDto(user);
+            return await _toDtoTranslator.ToUserDto(user);
         }
     }
 }
