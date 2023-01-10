@@ -16,13 +16,12 @@ namespace API.Controllers
             _userServices = userServices;
         }
 
-        [AllowAnonymous]
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserById(int userId)
         {
             return Ok(await _userServices.GetUserById(userId));
         }
-        [AllowAnonymous]
+        
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {

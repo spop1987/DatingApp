@@ -35,10 +35,11 @@ namespace API.Data.Translators
             return await Task.FromResult(new MemberDto{
                 UserId = user.UserId,
                 UserName = user.UserName,
+                PhotoUrl = user.Photos.First(p => p.IsMain is true).Url,
                 City = user.City,
                 Country = user.Country,
                 Created = user.Created,
-                DateOfBirth = user.DateOfBirth,
+                Age = user.GetAge(),
                 Gender = user.Gender,
                 Interests = user.Interests,
                 Introduction = user.Introduction,
@@ -72,32 +73,22 @@ namespace API.Data.Translators
 
         public async Task<List<MemberDto>> ToMembersDto(IEnumerable<AppUser> users)
         {
+            if(users == null)
+                return null;
+
             var membersDto = new List<MemberDto>();
-
+            
             var tasks = new List<Task>();
-
+            
             users.ToList().ForEach(user => {
-                tasks.Add(Task.Run(() => {
-                    membersDto.Add(new MemberDto{
-                        UserId = user.UserId,
-                        UserName = user.UserName,
-                        City = user.City,
-                        Country = user.Country,
-                        Created = user.Created,
-                        DateOfBirth = user.DateOfBirth,
-                        Gender = user.Gender,
-                        Interests = user.Interests,
-                        Introduction = user.Introduction,
-                        KnownAs = user.KnownAs,
-                        LastActive = user.LastActive,
-                        LookingFor = user.LookingFor,
-                        Photos = ToPhotosDto(user.Photos)   
-                    });
+            tasks.Add(Task.Run(async () => {
+                membersDto.Add(await ToMemberDto(user));
                 }));
             });
+
             Task t = Task.WhenAll(tasks);
             await t;
-
+          
             return membersDto;
         }
     }
