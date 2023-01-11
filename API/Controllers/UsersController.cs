@@ -16,12 +16,18 @@ namespace API.Controllers
             _userServices = userServices;
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("{userId:int}")]
         public async Task<IActionResult> GetUserById(int userId)
         {
             return Ok(await _userServices.GetUserById(userId));
         }
         
+        [HttpGet("{userName}")]
+        public async Task<IActionResult> GetUserByName(string userName)
+        {
+            return Ok(await _userServices.GetUserByName(userName));
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetUsers()
         {
